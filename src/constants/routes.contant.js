@@ -12,6 +12,6 @@ export const ROUTE_PATHS = {
 };
 
 export const NAV_ITEMS = [
-  { label: "داشبورد", name: ROUTE_NAMES.DASHBOARD, icon: DashboardIcon },
-  { label: "مسائل", name: ROUTE_NAMES.ISSUES, icon: IssuesIcon },
+  { label: "Dashboard", name: ROUTE_NAMES.DASHBOARD, icon: DashboardIcon },
+  { label: "Issues", name: ROUTE_NAMES.ISSUES, icon: IssuesIcon },
 ];

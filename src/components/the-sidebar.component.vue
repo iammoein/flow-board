@@ -62,6 +62,7 @@ const themes = [
   padding: rem(24) rem(16);
 
   background-color: $white;
+  border-right: 1px solid $neutral-outline;
 
   &__logo {
     @include flex($align: center);
@@ -86,8 +87,10 @@ const themes = [
     background-color: transparent;
 
     text-decoration: none;
-    
-    transition: background-color 300ms ease, color 300ms ease-in;
+
+    transition:
+      background-color 300ms ease,
+      color 300ms ease-in;
 
     &--active {
       background-color: $primary-container;

@@ -1,15 +1,11 @@
 <template>
   <button :class="buttonClasses">
-    {{ button }}
+    <slot />
   </button>
 </template>
 
 <script setup>
 const props = defineProps({
-  button: {
-    type: String,
-    default: "Click me",
-  },
   variant: {
     type: String,
     default: "danger",

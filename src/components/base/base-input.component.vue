@@ -1,38 +1,33 @@
 <template>
   <div class="base-input">
-    <label v-if="hasLabel" :for="id" class="base-input__label">{{ label }}</label>
-    <input
-      v-if="!hasTextarea"
-      :placeholder="placeholder"
+    <label v-if="label" :for="inputId" class="base-input__label">{{
+      label
+    }}</label>
+    <component
       v-model="model"
-      :id="id"
-      type="text"
+      v-bind="$attrs"
+      :is="as"
+      :id="inputId"
+      :type="type"
+      :placeholder="placeholder"
+      :class="`base-input__field--${as}`"
       class="base-input__field"
     />
-    <textarea
-      v-else
-      v-model="model"
-      :id="id"
-      :placeholder="placeholder"
-      class="base-input__field base-input__field--textarea"
-    ></textarea>
   </div>
 </template>
 
 <script setup>
+import { computed, useId } from "vue";
+
 const model = defineModel({
   type: String,
   default: "",
 });
 
-defineProps({
-  hasLabel: {
-    type: Boolean,
-    default: false,
-  },
+const props = defineProps({
   label: {
     type: String,
-    default: "title",
+    default: "",
   },
   placeholder: {
     type: String,
@@ -40,13 +35,26 @@ defineProps({
   },
   id: {
     type: String,
-    required: true,
+    default: null,
   },
-  hasTextarea: {
-    type: Boolean,
-    default: false,
+  as: {
+    type: String,
+    default: "input",
+    validator: (value) => ["input", "textarea"].includes(value),
+  },
+
+  type: {
+    type: String,
+    default: "text",
   },
 });
+
+defineOptions({
+  inheritAttrs: false,
+});
+
+const uid = useId();
+const inputId = computed(() => props.id ?? uid);
 </script>
 
 <style lang="scss" scoped>

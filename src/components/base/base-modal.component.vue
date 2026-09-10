@@ -1,13 +1,15 @@
 <template>
-  <div v-if="model" class="base-modal">
-    <div class="base-modal__overlay" @click="handleCloseModal"></div>
+  <transition name="modal">
+    <div v-if="model" class="base-modal">
+      <button class="base-modal__overlay" @click="handleCloseModal"></button>
 
-    <div class="base-modal__content">
-      <div class="base-modal__card" v-bind="$attrs">
-        <slot />
+      <div class="base-modal__content">
+        <div class="base-modal__card" v-bind="$attrs">
+          <slot />
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script setup>
@@ -42,6 +44,8 @@ const handleCloseModal = () => {
   width: 100%;
 
   &__overlay {
+    @include button-reset;
+
     position: absolute;
     inset: 0;
 
@@ -55,7 +59,31 @@ const handleCloseModal = () => {
     inset: 0;
 
     width: 100%;
+
+    pointer-events: none;
     z-index: 1000;
+  }
+
+  &__card {
+    pointer-events: auto;
+  }
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 200ms ease;
+
+  .base-modal__card {
+    transition: transform 200ms ease;
+  }
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+
+  .base-modal__card {
+    transform: scale(0.95);
   }
 }
 </style>

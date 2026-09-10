@@ -1,13 +1,22 @@
 <template>
   <div class="base-dropdown" ref="dropdownRef">
-    <button class="base-dropdown__trigger" @click="handleOpenDropdown">
-      <p>{{ selectedLabel }}</p>
-      <BaseIcon
-        class="base-dropdown__trigger-icon"
-        :icon="DownPath"
-        :size="8"
-      />
-    </button>
+    <div class="base-dropdown__field">
+      <label v-if="label" :for="dropdownId" class="base-dropdown__label">{{
+        label
+      }}</label>
+      <button
+        :id="dropdownId"
+        class="base-dropdown__trigger"
+        @click="handleOpenDropdown"
+      >
+        <p>{{ selectedLabel }}</p>
+        <BaseIcon
+          class="base-dropdown__trigger-icon"
+          :icon="DownPath"
+          :size="8"
+        />
+      </button>
+    </div>
     <ul class="base-dropdown__menu" v-if="open">
       <li v-if="!options.length">گزینه ای برای نمایش وجود نداره</li>
       <li
@@ -25,7 +34,7 @@
 </template>
 
 <script setup>
-import { computed, ref, useTemplateRef, watch } from "vue";
+import { computed, ref, useId, useTemplateRef } from "vue";
 import { onClickOutside } from "@vueuse/core";
 
 import BaseIcon from "./base-icon.component.vue";
@@ -40,12 +49,23 @@ const props = defineProps({
     type: String,
     default: "Select one item",
   },
+  label: {
+    type: String,
+    default: "",
+  },
+  id: {
+    type: String,
+    default: null,
+  },
 });
 
 const dropdownRef = useTemplateRef("dropdownRef");
 const model = defineModel();
 
 const open = ref(false);
+
+const uid = useId();
+const dropdownId = computed(() => props.id ?? uid);
 
 onClickOutside(dropdownRef, () => (open.value = false));
 
@@ -69,6 +89,17 @@ const selectedLabel = computed(() => {
   position: relative;
 
   width: 100%;
+
+  &__field {
+    @include flex(column);
+    gap: space(1.5);
+  }
+
+  &__label {
+    color: $neutral-on-surface-variant;
+
+    font-size: rem(12);
+  }
 
   &__trigger {
     width: 100%;

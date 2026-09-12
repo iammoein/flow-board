@@ -4,13 +4,14 @@
       label
     }}</label>
     <component
-      v-model="model"
       v-bind="$attrs"
+      :value="model"
       :is="as"
       :id="inputId"
       :type="type"
       :placeholder="placeholder"
       :class="`base-input__field--${as}`"
+      @input="handleInput"
       class="base-input__field"
     />
   </div>
@@ -55,6 +56,10 @@ defineOptions({
 
 const uid = useId();
 const inputId = computed(() => props.id ?? uid);
+
+const handleInput = (event) => {
+  model.value = event.target.value;
+};
 </script>
 
 <style lang="scss" scoped>

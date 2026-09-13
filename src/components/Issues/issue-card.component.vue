@@ -73,7 +73,7 @@ defineProps({
   &__title {
     color: $neutral-on-surface;
 
-    font-size: rem(12);
+    font-size: rem(13);
   }
 
   &__labels {

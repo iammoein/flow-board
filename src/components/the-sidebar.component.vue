@@ -64,6 +64,8 @@ const themes = [
   background-color: $white;
   border-right: 1px solid $neutral-outline;
 
+  z-index: 100;
+
   &__logo {
     @include flex($align: center);
     gap: space(2);

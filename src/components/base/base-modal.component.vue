@@ -38,7 +38,7 @@ const handleCloseModal = () => {
 .base-modal {
   @include flex($align: center, $justify: center);
 
-  position: absolute;
+  position: fixed;
   inset: 0;
 
   width: 100%;

@@ -20,4 +20,7 @@ export const useIssuesStore = defineStore("issues", () => {
     isCreateIssuesModal,
     createIssue,
   };
+
+}, {
+  persist: true,
 });

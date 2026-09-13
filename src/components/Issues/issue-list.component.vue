@@ -1,7 +1,11 @@
 <template>
   <ul class="issue-list">
     <li v-for="issue in issues" class="issue-list__item">
-      <IssueCard :issue-title="issue.title" :issue-date="issue.date" />
+      <IssueCard
+        :issue-title="issue.title"
+        :issue-date="issue.date"
+        :issue-number="issue.number"
+      />
     </li>
   </ul>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="issue-card">
     <div class="issue-card__header">
-      <span class="issue-card__number">#{{ issueNumber }}</span>
+      <IssueNumber :issue-number="issueNumber" />
       <p class="issue-card__avatar">avatar</p>
     </div>
 
@@ -21,6 +21,8 @@
 </template>
 
 <script setup>
+import IssueNumber from './issue-number.component.vue';
+
 defineProps({
   issueNumber: {
     type: Number,

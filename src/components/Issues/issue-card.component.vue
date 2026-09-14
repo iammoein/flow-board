@@ -1,7 +1,7 @@
 <template>
   <div class="issue-card">
     <div class="issue-card__header">
-      <p class="issue-card__number">#{{ issueNumber }}</p>
+      <span class="issue-card__number">#{{ issueNumber }}</span>
       <p class="issue-card__avatar">avatar</p>
     </div>
 

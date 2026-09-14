@@ -7,11 +7,7 @@
 
     <h4 class="issue-card__title">{{ issueTitle }}</h4>
 
-    <ul class="issue-card__labels">
-      <li v-for="label in issueLabels" class="issue-card__label">
-        {{ label }}
-      </li>
-    </ul>
+    <IssueLabels :issue-labels="issueLabels" />
 
     <div class="issue-card__footer">
       <div class="issue-card__icons">ui</div>
@@ -21,6 +17,7 @@
 </template>
 
 <script setup>
+import IssueLabels from './issue-labels.compoent.vue';
 import IssueNumber from './issue-number.component.vue';
 
 defineProps({
@@ -76,21 +73,6 @@ defineProps({
     color: $neutral-on-surface;
 
     font-size: rem(13);
-  }
-
-  &__labels {
-    @include flex($wrap: wrap);
-    gap: space(1);
-
-    font-size: rem(10);
-    font-weight: 500;
-  }
-
-  &__label {
-    padding: space(0.5) space(1.5);
-
-    border-radius: $radius-sm;
-    background-color: $neutral-surface;
   }
 
   &__footer {

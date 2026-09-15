@@ -2,24 +2,30 @@
   <BaseModal v-model="isCreateIssuesModal" class="issue">
     <div class="issue__header">
       <h3 class="issue__title">{{ modalTitle }}</h3>
-      <button class="issue__close-button" @click="handleCloseModal">
-        <BaseIcon :icon="CloseIcon" :size="16" class="issue__header-icon" />
-      </button>
+      <CloseButton class="issue__close-button" @close="handleCloseModal" />
     </div>
     <TheDivider class="issue__divider" />
 
     <form @submit.prevent="handleSubmit" class="issue__form">
-      <BaseInput
-        label="Title"
-        placeholder="Add a title for your issue..."
-        id="issue-title"
-      />
-      <BaseInput
-        as="textarea"
-        label="Description"
-        id="issue-description"
-        placeholder="Add a description or outline technical notes..."
-      />
+      <div>
+        <BaseInput
+          v-model="formData.title"
+          label="Title"
+          placeholder="Add a title for your issue..."
+          id="issue-title"
+        />
+        <BaseError :message="error?.title?.[0]" />
+      </div>
+      <div>
+        <BaseInput
+          v-model="formData.description"
+          as="textarea"
+          label="Description"
+          id="issue-description"
+          placeholder="Add a description or outline technical notes..."
+        />
+        <BaseError :message="error?.description?.[0]" />
+      </div>
 
       <div class="issue__form-group">
         <BaseDropdown label="Project" />
@@ -45,18 +51,20 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import z from "zod";
+import { reactive, ref } from "vue";
+import { storeToRefs } from "pinia";
 import { useIssuesStore } from "@/stores/issues.store.js";
+import { issuesSchema } from "@/schemas/issues.schema.js";
 
 import BaseInput from "../base/base-input.component.vue";
 import BaseModal from "../base/base-modal.component.vue";
 import BaseDropdown from "../base/‌base-dropdown.component.vue";
-import BaseIcon from "../base/base-icon.component.vue";
 import BaseButton from "../base/base-button.component.vue";
+import BaseError from "../base/base-error.component.vue";
 import TheDivider from "../shared/the-divider.component.vue";
 
-import CloseIcon from "../icons/close.icon.vue";
-import { storeToRefs } from "pinia";
+import CloseButton from "../shared/close-button.component.vue";
 
 defineProps({
   modalTitle: {
@@ -69,8 +77,12 @@ defineProps({
   },
 });
 
-const title = ref("");
-const description = ref("");
+const formData = reactive({
+  title: "",
+  description: "",
+});
+
+const error = ref({});
 
 const store = useIssuesStore();
 
@@ -78,10 +90,29 @@ const { isCreateIssuesModal } = storeToRefs(store);
 
 const handleCloseModal = () => {
   isCreateIssuesModal.value = false;
+
+  error.value = {};
+  resetForm();
 };
 
 const handleSubmit = () => {
-  console.log('form');
+  const result = issuesSchema.safeParse(formData);
+
+  if (!result.success) {
+    error.value = z.flattenError(result.error).fieldErrors;
+    return;
+  }
+
+  store.createIssue(result.data);
+
+  handleCloseModal();
+};
+
+const resetForm = () => {
+  Object.assign(formData, {
+    title: "",
+    description: "",
+  });
 };
 </script>
 

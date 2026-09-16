@@ -31,10 +31,10 @@
 <script setup>
 import { NAV_ITEMS } from "@/constants/routes.contant.js";
 
-import BaseIcon from "./base/base-icon.component.vue";
-import BaseDropdown from "./base/‌base-dropdown.component.vue";
+import BaseIcon from "../base/base-icon.component.vue";
+import BaseDropdown from "../base/‌base-dropdown.component.vue";
 
-import LogoIcon from "./icons/logo.icon.vue";
+import LogoIcon from "../icons/logo.icon.vue";
 
 const themes = [
   {

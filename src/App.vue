@@ -14,7 +14,7 @@ import { NAV_ITEMS } from "./constants/routes.contant.js";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
 
-import TheSidebar from "./components/the-sidebar.component.vue";
+import TheSidebar from "./components/shared/the-sidebar.component.vue";
 import TheHeader from "./layouts/the-header-layout.vue";
 import CreateIssueModal from "./components/Issues/create-issue-modal.compoent.vue";
 

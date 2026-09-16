@@ -4,11 +4,13 @@ import IssuesIcon from "@/components/icons/issues.icon.vue";
 export const ROUTE_NAMES = {
   DASHBOARD: "dashboard",
   ISSUES: "issues",
+  ISSUE_DETAIL: "issue-detail",
 };
 
 export const ROUTE_PATHS = {
   DASHBOARD: "/",
   ISSUES: "/issues",
+  ISSUE_DETAIL: "/issues/:id",
 };
 
 export const NAV_ITEMS = [

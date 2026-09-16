@@ -17,6 +17,11 @@ const router = createRouter({
       name: ROUTE_NAMES.ISSUES,
       component: Issues,
     },
+    {
+      path: ROUTE_PATHS.ISSUE_DETAIL,
+      name: ROUTE_NAMES.ISSUE_DETAIL,
+      component: Issues
+    },
   ],
 });
 

@@ -5,7 +5,7 @@
     </div>
     <div class="header__actions">
       <SearchBar v-model="input" class="header__actions-search" />
-      <base-button variant="primary" class="header__actions-button">
+      <base-button variant="primary" class="header__actions-button" @click="handleOpenModal">
         <BaseIcon :icon="PlusIcon" :size="9" />
         New
       </base-button>
@@ -21,6 +21,8 @@ import BaseIcon from "@/components/base/base-icon.component.vue";
 import SearchBar from "@/components/shared/search-bar.component.vue";
 
 import PlusIcon from "@/components/icons/plus.icon.vue";
+import { useIssuesStore } from "@/stores/issues.store";
+import { storeToRefs } from "pinia";
 
 defineProps({
   headerTitle: {
@@ -28,6 +30,13 @@ defineProps({
     default: "header",
   },
 });
+
+const issuesStore = useIssuesStore();
+const { isCreateIssuesModal } = storeToRefs(issuesStore);
+
+const handleOpenModal = () => {
+  isCreateIssuesModal.value = true;
+};
 
 const input = ref("");
 </script>
@@ -51,7 +60,7 @@ const input = ref("");
   }
 
   &__actions {
-    @include flex($align:center);
+    @include flex($align: center);
     gap: space(4);
   }
 

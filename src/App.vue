@@ -1,11 +1,14 @@
 <template>
   <div class="app-layout">
     <TheSidebar />
-    <main class="app-layout__main" >
+    <div class="app-layout__body">
       <TheHeader :header-title="headerTitle" />
-      <RouterView class="app-layout__content" />
-      <CreateIssueModal modal-title="Create Issue"/>
-    </main>
+
+      <main class="app-layout__main">
+        <RouterView class="app-layout__content" />
+        <CreateIssueModal modal-title="Create Issue" />
+      </main>
+    </div>
   </div>
 </template>
 
@@ -29,20 +32,31 @@ const headerTitle = computed(
 .app-layout {
   @include flex;
 
+  min-height: 100dvh;
   width: 100%;
+
+  &__body {
+    @include flex(column);
+
+    width: 100%;
+    min-height: 100dvh;
+  }
 
   &__main {
     position: relative;
+    flex: 1;
 
+    min-height: 0;
     width: 100%;
-    min-height: 100vh;
-    
 
     background-color: $neutral-surface;
   }
 
   &__content {
     padding: space(6);
+    height: 100%;
+
+    overflow-y: auto;
   }
 }
 </style>

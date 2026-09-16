@@ -57,7 +57,7 @@ const themes = [
   @include flex(column);
   gap: space(8);
 
-  min-height: 100vh;
+  min-height: 100dvh;
   width: rem(200);
   padding: rem(24) rem(16);
 

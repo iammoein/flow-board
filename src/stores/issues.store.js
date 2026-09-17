@@ -18,6 +18,8 @@ export const useIssuesStore = defineStore(
       });
     };
 
+    const getIssueById = (id) => issues.value.find((issue) => issue.id === id);
+
     const nextIssueNumber = computed(() => {
       if (issues.value.length === 0) return 100;
       return Math.max(...issues.value.map((issue) => issue.number)) + 1;
@@ -27,6 +29,7 @@ export const useIssuesStore = defineStore(
       issues,
       isCreateIssuesModal,
       createIssue,
+      getIssueById
     };
   },
   {

@@ -1,44 +1,105 @@
 <template>
-  <transition name="modal">
-    <div v-if="model" class="base-modal">
-      <button class="base-modal__overlay" @click="handleCloseModal"></button>
+  <teleport :to="teleportTo" defer>
+    <transition name="modal" appear @after-leave="leaveModal">
+      <div
+        v-if="model"
+        class="base-modal"
+        :class="`base-modal--${placement}`"
+        role="dialog"
+        aria-modal="true"
+      >
+        <button class="base-modal__overlay" @click="handleCloseModal" />
 
-      <div class="base-modal__content">
         <div class="base-modal__card" v-bind="$attrs">
           <slot />
         </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </teleport>
 </template>
 
 <script setup>
+import { onMounted, onBeforeUnmount, watch } from 'vue';
+
 const model = defineModel({
   type: Boolean,
   default: true,
 });
 
-defineProps({
-
+const props = defineProps({
+  placement: {
+    type: String,
+    default: 'center',
+    validator: (value) => ['center', 'right', 'left'].includes(value),
+  },
+  teleportTo: {
+    type: String,
+    default: 'body',
+  },
+  closeOnEsc: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 defineOptions({
   inheritAttrs: false,
 });
 
+const emit = defineEmits(['leave']);
+
 const handleCloseModal = () => {
   model.value = false;
 };
+
+const handleKeydown = (e) => {
+  if (props.closeOnEsc && e.key === 'Escape') {
+    handleCloseModal();
+  }
+};
+
+const leaveModal = () => {
+  emit('leave');
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleKeydown);
+  document.body.style.overflow = '';
+});
+
+watch(
+  model,
+  (isOpen) => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  },
+  { immediate: true },
+);
 </script>
 
 <style lang="scss" scoped>
 .base-modal {
   @include flex($align: center, $justify: center);
 
-  position: fixed;
+  position: absolute;
   inset: 0;
+  z-index: 1000;
 
-  width: 100%;
+  &--right,
+  &--left {
+    align-items: stretch;
+  }
+
+  &--right {
+    justify-content: flex-end;
+  }
+
+  &--left {
+    justify-content: flex-start;
+  }
 
   &__overlay {
     @include button-reset;
@@ -50,18 +111,8 @@ const handleCloseModal = () => {
     opacity: 40%;
   }
 
-  &__content {
-    @include flex($align: center, $justify: center);
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-
-    pointer-events: none;
-    z-index: 1000;
-  }
-
   &__card {
+    position: relative;
     pointer-events: auto;
   }
 }
@@ -78,9 +129,20 @@ const handleCloseModal = () => {
 .modal-enter-from,
 .modal-leave-to {
   opacity: 0;
+}
 
-  .base-modal__card {
-    transform: scale(0.95);
-  }
+.base-modal--center.modal-enter-from .base-modal__card,
+.base-modal--center.modal-leave-to .base-modal__card {
+  transform: scale(0.95);
+}
+
+.base-modal--right.modal-enter-from .base-modal__card,
+.base-modal--right.modal-leave-to .base-modal__card {
+  transform: translateX(100%);
+}
+
+.base-modal--left.modal-enter-from .base-modal__card,
+.base-modal--left.modal-leave-to .base-modal__card {
+  transform: translateX(-100%);
 }
 </style>

@@ -71,10 +71,6 @@ defineProps({
     type: String,
     defualt: "Create Issue",
   },
-  teleportTo: {
-    type: String,
-    default: "body",
-  },
 });
 
 const formData = reactive({

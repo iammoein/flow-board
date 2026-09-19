@@ -19,10 +19,7 @@ const model = defineModel({
 });
 
 defineProps({
-  teleportTo: {
-    type: String,
-    default: "body",
-  },
+
 });
 
 defineOptions({

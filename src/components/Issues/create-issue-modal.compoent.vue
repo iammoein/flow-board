@@ -1,56 +1,56 @@
 <template>
-  <base-modal
-    v-model="isCreateIssuesModal"
-    teleport-to="#app-body"
-    class="issue"
-  >
-    <div class="issue__header">
-      <h3 class="issue__title">{{ modalTitle }}</h3>
-      <CloseButton class="issue__close-button" @close="handleCloseModal" />
+  <base-modal v-model="isCreateIssuesModal" teleport-to="#app-body">
+    <div class="issue">
+      <div class="issue__header">
+        <h3 class="issue__title">{{ modalTitle }}</h3>
+        <CloseButton class="issue__close-button" @close="handleCloseModal" />
+      </div>
+      <TheDivider class="issue__divider" />
+      <form class="issue__form" @submit.prevent="handleSubmit">
+        <div>
+          <BaseInput
+            id="issue-title"
+            v-model="formData.title"
+            label="Title"
+            placeholder="Add a title for your issue..."
+          />
+          <BaseError :message="error?.title?.[0]" />
+        </div>
+        <div>
+          <BaseInput
+            id="issue-description"
+            v-model="formData.description"
+            as="textarea"
+            label="Description"
+            placeholder="Add a description or outline technical notes..."
+          />
+          <BaseError :message="error?.description?.[0]" />
+        </div>
+        <div class="issue__form-group">
+          <BaseDropdown label="Project" />
+          <BaseDropdown label="Status" />
+          <BaseDropdown label="Priority" />
+        </div>
+        <div class="issue__form-group">
+          <BaseDropdown label="Assignee" />
+          <BaseDropdown label="Milestone" />
+          <BaseDropdown label="Due Date" />
+        </div>
+
+        <div>
+          <TagInput v-model="formData.tags" class="issue__form-tag" />
+        </div>
+
+        <TheDivider />
+
+        <div class="issue__form-submit">
+          <base-button type="button" variant="outline" @click="handleCloseModal"
+            >Cancel</base-button
+          >
+          <base-button type="submit">Create Issue</base-button>
+        </div>
+      </form>
     </div>
-    <TheDivider class="issue__divider" />
-
-    <form class="issue__form" @submit.prevent="handleSubmit">
-      <div>
-        <BaseInput
-          id="issue-title"
-          v-model="formData.title"
-          label="Title"
-          placeholder="Add a title for your issue..."
-        />
-        <BaseError :message="error?.title?.[0]" />
-      </div>
-      <div>
-        <BaseInput
-          id="issue-description"
-          v-model="formData.description"
-          as="textarea"
-          label="Description"
-          placeholder="Add a description or outline technical notes..."
-        />
-        <BaseError :message="error?.description?.[0]" />
-      </div>
-
-      <div class="issue__form-group">
-        <BaseDropdown label="Project" />
-        <BaseDropdown label="Status" />
-        <BaseDropdown label="Priority" />
-      </div>
-
-      <div class="issue__form-group">
-        <BaseDropdown label="Assignee" />
-        <BaseDropdown label="Milestone" />
-        <BaseDropdown label="Due Date" />
-      </div>
-
-      <TheDivider />
-      <div class="issue__form-submit">
-        <base-button type="button" variant="outline" @click="handleCloseModal"
-          >Cancel</base-button
-        >
-        <base-button type="submit">Create Issue</base-button>
-      </div>
-    </form>
   </base-modal>
 </template>
 
@@ -69,17 +69,19 @@ import BaseError from '../base/base-error.component.vue';
 import TheDivider from '../shared/the-divider.component.vue';
 
 import CloseButton from '../shared/close-button.component.vue';
+import TagInput from '../shared/tag-input.component.vue';
 
 defineProps({
   modalTitle: {
     type: String,
-    defualt: 'Create Issue',
+    default: 'Create Issue',
   },
 });
 
 const formData = reactive({
   title: '',
   description: '',
+  tags: [],
 });
 
 const error = ref({});
@@ -112,11 +114,12 @@ const resetForm = () => {
   Object.assign(formData, {
     title: '',
     description: '',
+    tags: [],
   });
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .issue {
   width: rem(600);
   padding: space(6);

@@ -99,6 +99,7 @@ const handleCloseModal = () => {
 
 const handleSubmit = () => {
   const result = issuesSchema.safeParse(formData);
+  console.log(result, 'result');
 
   if (!result.success) {
     error.value = z.flattenError(result.error).fieldErrors;
@@ -121,11 +122,16 @@ const resetForm = () => {
 
 <style lang="scss" scoped>
 .issue {
+  max-height: rem(580);
   width: rem(600);
+  max-width: 100%;
+
   padding: space(6);
 
   border-radius: $radius-lg;
   background-color: $white;
+
+  overflow: auto;
 
   &__header {
     @include flex($justify: space-between, $align: center);

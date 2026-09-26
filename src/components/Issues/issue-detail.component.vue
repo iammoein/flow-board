@@ -1,55 +1,77 @@
 <template>
-  <div class="issue-detail">
-    <div class="issue-detail__header">
-      <IssueNumber :issue-number="issueNumber" />
-      <CloseButton />
+  <base-modal
+    v-model="isOpen"
+    placement="right"
+    teleport-to="#app-main"
+    @leave="handleAftreLeave"
+  >
+    <div class="issue-detail">
+      <div class="issue-detail__header">
+        <IssueNumber :issue-number="issue.number" />
+        <CloseButton @close="handleCloseDetail" />
+      </div>
+
+      <h3 class="issue-detail__title">{{ issue.title }}</h3>
+
+      <IssueLabels
+        :issue-labels="issue.tags"
+        class="issue-detail__labels"
+        label-size="md"
+      />
+
+      <TheDivider />
+
+      <div class="issue-detail__section">
+        <h4 class="issue-detail__sub-title">Description</h4>
+        <p class="issue-detail__description">
+          {{ issue.description }}
+        </p>
+      </div>
+
+      <TheDivider />
     </div>
-
-    <h3 class="issue-detail__title">{{ issueTitle }}</h3>
-
-    <IssueLabels
-      :issue-labels="issueLabels"
-      class="issue-detail__labels"
-      label-size="md"
-    />
-
-    <TheDivider />
-
-    <div class="issue-detail__section">
-      <h4 class="issue-detail__sub-title">Description</h4>
-      <p class="issue-detail__description">
-        {{ issueDescription }}
-      </p>
-    </div>
-
-    <TheDivider />
-  </div>
+  </base-modal>
 </template>
 
 <script setup>
-import CloseButton from "../shared/close-button.component.vue";
-import TheDivider from "../shared/the-divider.component.vue";
-import IssueLabels from "./issue-labels.compoent.vue";
-import IssueNumber from "./issue-number.component.vue";
+import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { ROUTE_NAMES } from '@/constants/routes.contant.js';
 
-defineProps({
-  issueNumber: {
-    type: Number,
-    defult: 100,
-  },
-  issueTitle: {
-    type: String,
-    default: "issue",
-  },
-  issueLabels: {
-    type: Array,
-    default: () => ["label", "label"],
-  },
-  issueDescription: {
-    type: String,
-    default: "Description",
+import CloseButton from '../shared/close-button.component.vue';
+import TheDivider from '../shared/the-divider.component.vue';
+import IssueLabels from './issue-labels.compoent.vue';
+import IssueNumber from './issue-number.component.vue';
+import BaseModal from '../base/base-modal.component.vue';
+
+const props = defineProps({
+  issue: {
+    type: Object,
+    default: () => {},
   },
 });
+
+console.log(props.issue, 'issues');
+
+watch(
+  () => props.issue,
+  (val) => {
+    console.log(val, 'issues');
+  },
+);
+
+const isOpen = ref(true);
+const router = useRouter();
+
+const handleCloseDetail = () => {
+  isOpen.value = false;
+};
+
+const handleAftreLeave = () => {
+  router.push({
+    name: ROUTE_NAMES.ISSUES,
+  });
+};
 </script>
 
 <style scoped lang="scss">
@@ -58,7 +80,7 @@ defineProps({
   gap: space(5);
 
   width: rem(440);
-  height: 100vh;
+  height: 100%;
   padding: space(5);
 
   background-color: $white;

@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ROUTE_NAMES } from '@/constants/routes.contant.js';
 
@@ -44,21 +44,12 @@ import IssueLabels from './issue-labels.compoent.vue';
 import IssueNumber from './issue-number.component.vue';
 import BaseModal from '../base/base-modal.component.vue';
 
-const props = defineProps({
+defineProps({
   issue: {
     type: Object,
     default: () => {},
   },
 });
-
-console.log(props.issue, 'issues');
-
-watch(
-  () => props.issue,
-  (val) => {
-    console.log(val, 'issues');
-  },
-);
 
 const isOpen = ref(true);
 const router = useRouter();

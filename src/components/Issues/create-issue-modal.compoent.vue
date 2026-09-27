@@ -99,7 +99,6 @@ const handleCloseModal = () => {
 
 const handleSubmit = () => {
   const result = issuesSchema.safeParse(formData);
-  console.log(result, 'result');
 
   if (!result.success) {
     error.value = z.flattenError(result.error).fieldErrors;

@@ -1,11 +1,12 @@
 <template>
-  <div class="base-dropdown" ref="dropdownRef">
+  <div ref="dropdownRef" class="base-dropdown">
     <div class="base-dropdown__field">
       <label v-if="label" :for="dropdownId" class="base-dropdown__label">{{
         label
       }}</label>
       <button
         :id="dropdownId"
+        type="button"
         class="base-dropdown__trigger"
         @click="handleOpenDropdown"
       >
@@ -17,13 +18,13 @@
         />
       </button>
     </div>
-    <ul class="base-dropdown__menu" v-if="open">
+    <ul v-if="open" class="base-dropdown__menu">
       <li v-if="!options.length">گزینه ای برای نمایش وجود نداره</li>
       <li
         v-for="option in options"
         :key="option.value"
-        @click="handleSelect(option.value)"
         class="base-dropdown__menu-item"
+        @click="handleSelect(option.value)"
       >
         <button class="base-dropdown__menu-button">
           {{ option.label }}
@@ -34,11 +35,11 @@
 </template>
 
 <script setup>
-import { computed, ref, useId, useTemplateRef } from "vue";
-import { onClickOutside } from "@vueuse/core";
+import { computed, ref, useId, useTemplateRef } from 'vue';
+import { onClickOutside } from '@vueuse/core';
 
-import BaseIcon from "./base-icon.component.vue";
-import DownPath from "../icons/down-path.icon.vue";
+import BaseIcon from './base-icon.component.vue';
+import DownPath from '../icons/down-path.icon.vue';
 
 const props = defineProps({
   options: {
@@ -47,11 +48,11 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: "Select one item",
+    default: 'Select one item',
   },
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   id: {
     type: String,
@@ -59,7 +60,7 @@ const props = defineProps({
   },
 });
 
-const dropdownRef = useTemplateRef("dropdownRef");
+const dropdownRef = useTemplateRef('dropdownRef');
 const model = defineModel();
 
 const open = ref(false);

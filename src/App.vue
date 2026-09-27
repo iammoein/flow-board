@@ -1,10 +1,10 @@
 <template>
   <div class="app-layout">
     <TheSidebar />
-    <div class="app-layout__body">
+    <div id="app-body" class="app-layout__body">
       <TheHeader :header-title="headerTitle" />
 
-      <main class="app-layout__main">
+      <main id="app-main" class="app-layout__main">
         <RouterView class="app-layout__content" />
         <CreateIssueModal modal-title="Create Issue" />
       </main>
@@ -13,13 +13,13 @@
 </template>
 
 <script setup>
-import { NAV_ITEMS } from "./constants/routes.contant.js";
-import { useRoute } from "vue-router";
-import { computed } from "vue";
+import { NAV_ITEMS } from './constants/routes.contant.js';
+import { useRoute } from 'vue-router';
+import { computed } from 'vue';
 
-import TheSidebar from "./components/shared/the-sidebar.component.vue";
-import TheHeader from "./layouts/the-header-layout.vue";
-import CreateIssueModal from "./components/Issues/create-issue-modal.compoent.vue";
+import TheSidebar from './components/shared/the-sidebar.component.vue';
+import TheHeader from './layouts/the-header-layout.vue';
+import CreateIssueModal from './components/Issues/create-issue-modal.compoent.vue';
 
 const route = useRoute();
 

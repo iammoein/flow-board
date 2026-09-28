@@ -3,6 +3,7 @@ import { ROUTE_NAMES, ROUTE_PATHS } from '@/constants/routes.contant';
 
 import Dashboard from '@/views/dashboard.view.vue';
 import Issues from '@/views/issues-page.view.vue';
+import Projects from '@/views/projects.view.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: ROUTE_PATHS.ISSUE_DETAIL,
       name: ROUTE_NAMES.ISSUE_DETAIL,
       component: Issues,
+    },
+    {
+      path: ROUTE_PATHS.PROJECTS,
+      name: ROUTE_NAMES.PROJECTS,
+      component: Projects,
     },
   ],
 });

@@ -7,6 +7,7 @@ export default [
   {
     rules: {
       'vue/attributes-order': 'error',
+      'vue/multi-word-component-names': 'off',
     },
   },
 

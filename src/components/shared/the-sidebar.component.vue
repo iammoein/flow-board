@@ -5,14 +5,14 @@
       <h6>Flow Board</h6>
     </div>
 
-    <BaseDropdown :options="themes" />
+    <BaseDropdown v-model="theme" :options="themes" placeholder="Theme" />
 
     <nav class="sidebar__nav">
       <ul class="sidebar__nav-list">
         <li
-          class="sidebar__nav-item"
           v-for="item in NAV_ITEMS"
           :key="item.name"
+          class="sidebar__nav-item"
         >
           <router-link
             class="sidebar__nav-link"
@@ -29,25 +29,28 @@
 </template>
 
 <script setup>
-import { NAV_ITEMS } from "@/constants/routes.contant.js";
+import { NAV_ITEMS } from '@/constants/routes.contant.js';
+import { useTheme } from '@/composables/use-theme.composable.js';
 
-import BaseIcon from "../base/base-icon.component.vue";
-import BaseDropdown from "../base/‌base-dropdown.component.vue";
+import BaseIcon from '../base/base-icon.component.vue';
+import BaseDropdown from '../base/base-dropdown.component.vue';
 
-import LogoIcon from "../icons/logo.icon.vue";
+import LogoIcon from '../icons/logo.icon.vue';
+
+const { theme } = useTheme();
 
 const themes = [
   {
-    label: "Light",
-    value: "light",
+    label: 'Light',
+    value: 'light',
   },
   {
-    label: "Dark",
-    value: "dark",
+    label: 'Dark',
+    value: 'dark',
   },
   {
-    label: "System",
-    value: "system",
+    label: 'System',
+    value: 'system',
   },
 ];
 </script>
@@ -61,8 +64,11 @@ const themes = [
   width: rem(200);
   padding: rem(24) rem(16);
 
-  background-color: $white;
+  background-color: $neutral-surface-container;
   border-right: 1px solid $neutral-outline;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 
   z-index: 100;
 

@@ -50,6 +50,7 @@ const headerTitle = computed(
     width: 100%;
 
     background-color: $neutral-surface;
+    transition: background-color 0.2s ease;
   }
 
   &__content {

@@ -27,15 +27,15 @@ defineProps({
   },
   issueTitle: {
     type: String,
-    default: "Title",
+    default: 'Title',
   },
   issueLabels: {
     type: Array,
-    default: () => ["label", "label"],
+    default: () => ['label', 'label'],
   },
   issueDate: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 </script>
@@ -50,9 +50,12 @@ defineProps({
   height: auto;
   padding: space(3);
 
-  background-color: $white;
+  background-color: $neutral-surface-container;
   border-radius: $radius-md;
   border: 1px solid $neutral-outline;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 
   &__header {
     @include flex($justify: space-between);

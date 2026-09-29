@@ -1,0 +1,116 @@
+// _theme.scss
+
+:root {
+  // Brand
+  --primary: #635bff;
+  --primary-container: #eeecff;
+  --on-primary: #ffffff;
+  --on-primary-container: #4f46d9;
+
+  --secondary: #f0efff;
+  --secondary-container: #f5f3ff;
+  --on-secondary: #4f46d9;
+  --on-secondary-container: #4338ca;
+
+  --error: #ef4444;
+
+  // Surfaces
+  --surface: #f8f8f8;
+  --surface-container: #ffffff;
+  --surface-container-low: #f5f5f6;
+  --surface-container-high: #eeeeef;
+  --surface-container-highest: #e7e7e9;
+
+  --on-surface: #18181b;
+  --on-surface-variant: #71717a;
+
+  --outline: #e4e4e7;
+  --outline-variant: #ebebed;
+
+  // States
+  --state-hover: #00000008;
+  --state-focus: #635bff1a;
+  --state-pressed: #00000012;
+
+  // Container pairs
+  --cyan-container: #ecfcff;
+  --cyan-on-container: #008490;
+  --red-container: #ffedea;
+  --red-on-container: #bf0600;
+  --yellow-container: #fff3e5;
+  --yellow-on-container: #c08600;
+  --green-container: #eefae8;
+  --green-on-container: #066e16;
+  --violet-container: #f7edff;
+  --violet-on-container: #7723ed;
+  --blue-container: #edf4ff;
+  --blue-on-container: #2563eb;
+  --pink-container: #fff0f7;
+  --pink-on-container: #db2777;
+  --orange-container: #fff4e8;
+  --orange-on-container: #ea580c;
+
+  // Text
+  --text-color: #27272a;
+  --text-color-muted: #71717a;
+  --text-color-subtle: #a1a1aa;
+  --text-color-inverse: #ffffff;
+  --text-color-primary: var(--primary);
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --primary: #b4b0ff;
+  --primary-container: #4638d1;
+  --on-primary: #241a63;
+  --on-primary-container: #e0deff;
+
+  --secondary: #3a3660;
+  --secondary-container: #2c2850;
+  --on-secondary: #e4e1ff;
+  --on-secondary-container: #c9c4ff;
+
+  --error: #ff8a80;
+
+  --surface: #121214;
+  --surface-container: #1c1c1f;
+  --surface-container-low: #18181a;
+  --surface-container-high: #26262a;
+  --surface-container-highest: #303034;
+
+  --on-surface: #f4f4f5;
+  --on-surface-variant: #a1a1aa;
+
+  --outline: #3f3f46;
+  --outline-variant: #2c2c30;
+
+  --state-hover: #ffffff08;
+  --state-focus: #b4b0ff1a;
+  --state-pressed: #ffffff12;
+
+  --cyan-container: #003943;
+  --cyan-on-container: #67e8f9;
+  --red-container: #4c0d0a;
+  --red-on-container: #ff8a80;
+  --yellow-container: #4d3200;
+  --yellow-on-container: #fbbf24;
+  --green-container: #0b3d15;
+  --green-on-container: #4ade80;
+  --violet-container: #35134d;
+  --violet-on-container: #c084fc;
+  --blue-container: #0c2d63;
+  --blue-on-container: #60a5fa;
+  --pink-container: #4a0f2c;
+  --pink-on-container: #f472b6;
+  --orange-container: #4a2100;
+  --orange-on-container: #fb923c;
+
+  --text-color: #f4f4f5;
+  --text-color-muted: #a1a1aa;
+  --text-color-subtle: #71717a;
+  --text-color-inverse: #18181b;
+  --text-color-primary: var(--primary);
+
+  color-scheme: dark;
+}

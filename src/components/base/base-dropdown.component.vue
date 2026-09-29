@@ -112,14 +112,19 @@ const selectedLabel = computed(() => {
     background-color: $neutral-surface;
     border: 1px solid $neutral-outline;
     border-radius: space(2);
+    color: $neutral-on-surface;
 
     cursor: pointer;
 
     @include flex($align: center, $justify: space-between);
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
   }
 
   &__trigger-icon {
-    color: $gray-500;
+    color: $neutral-on-surface-variant;
   }
 
   &__menu {
@@ -131,9 +136,10 @@ const selectedLabel = computed(() => {
     max-height: rem(200);
     padding: space(2) space(3);
 
-    background-color: $neutral-surface;
+    background-color: $neutral-surface-container;
+    border: 1px solid $neutral-outline;
     border-radius: space(2);
-    box-shadow: 0 rem(4) rem(12) rgba($gray-900, 0.1);
+    box-shadow: $shadow-md;
 
     overflow-y: auto;
     z-index: 10;
@@ -150,14 +156,16 @@ const selectedLabel = computed(() => {
 
     width: 100%;
     padding: space(2) space(2);
+    color: $neutral-on-surface;
 
     text-align: start;
 
     cursor: pointer;
+    border-radius: $radius-sm;
     transition: background-color 0.15s ease;
 
     &:hover {
-      background-color: $gray-300;
+      background-color: $state-hover;
     }
   }
 }

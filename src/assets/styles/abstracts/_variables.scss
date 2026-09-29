@@ -1,14 +1,14 @@
-$primary: #635bff;
-$primary-container: #EEF2FF;
-$on-primary: #ffffff;
-$on-primary-container: #4f46d9;
+$primary: var(--primary, #635bff);
+$primary-container: var(--primary-container, #eef2ff);
+$on-primary: var(--on-primary, #ffffff);
+$on-primary-container: var(--on-primary-container, #4f46d9);
 
-$secondary: #f0efff;
-$secondary-container: #f5f3ff;
-$on-secondary: #4f46d9;
-$on-secondary-container: #4338ca;
+$secondary: var(--secondary, #f0efff);
+$secondary-container: var(--secondary-container, #f5f3ff);
+$on-secondary: var(--on-secondary, #4f46d9);
+$on-secondary-container: var(--on-secondary-container, #4338ca);
 
-$error: #ef4444;
+$error: var(--error, #ef4444);
 
 $white: hsl(0, 0%, 100%);
 $white-soft: hsl(228, 33%, 97%);
@@ -26,22 +26,22 @@ $gray-900: #18181b;
 
 $black: #000000;
 
-$neutral-surface: #f8f8f8;
-$neutral-surface-container: #ffffff;
-$neutral-surface-container-low: #f5f5f6;
-$neutral-surface-container-high: #eeeeef;
-$neutral-surface-container-highest: #e7e7e9;
+$neutral-surface: var(--surface, #f8f8f8);
+$neutral-surface-container: var(--surface-container, #ffffff);
+$neutral-surface-container-low: var(--surface-container-low, #f5f5f6);
+$neutral-surface-container-high: var(--surface-container-high, #eeeeef);
+$neutral-surface-container-highest: var(--surface-container-highest, #e7e7e9);
 
-$neutral-on-surface: #18181b;
-$neutral-on-surface-variant: #71717a;
+$neutral-on-surface: var(--on-surface, #18181b);
+$neutral-on-surface-variant: var(--on-surface-variant, #71717a);
 
-$neutral-outline: #e4e4e7;
-$neutral-outline-variant: #ebebed;
+$neutral-outline: var(--outline, #e4e4e7);
+$neutral-outline-variant: var(--outline-variant, #ebebed);
 
-$state-layer: #0000001a;
-$state-hover: #00000008;
-$state-focus: #635bff1a;
-$state-pressed: #00000012;
+$state-layer: var(--state-layer, #0000001a);
+$state-hover: var(--state-hover, #00000008);
+$state-focus: var(--state-focus, #635bff1a);
+$state-pressed: var(--state-pressed, #00000012);
 
 $hue-1: #ef4444;
 $hue-2: #ff6b57;
@@ -98,11 +98,11 @@ $radius-pill: 9999px;
 
 $font-family: "Inter", sans-serif;
 
-$text-color: $gray-800;
-$text-color-muted: $gray-500;
-$text-color-subtle: $gray-400;
-$text-color-inverse: $white;
-$text-color-primary: $primary;
+$text-color: var(--text-color, #27272a);
+$text-color-muted: var(--text-color-muted, #71717a);
+$text-color-subtle: var(--text-color-subtle, #a1a1aa);
+$text-color-inverse: var(--text-color-inverse, #ffffff);
+$text-color-primary: var(--text-color-primary, var(--primary));
 
 $spacing-none: 0;
 $spacing-xs: 2px;

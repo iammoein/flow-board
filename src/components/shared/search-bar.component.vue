@@ -13,29 +13,29 @@
 </template>
 
 <script setup>
-import BaseIcon from "../base/base-icon.component.vue";
-import SearchIcon from "../icons/search.icon.vue";
+import BaseIcon from '../base/base-icon.component.vue';
+import SearchIcon from '../icons/search.icon.vue';
 
 const model = defineModel({
   type: String,
-  default: "",
+  default: '',
 });
 
-const emit = defineEmits(["search"]);
+const emit = defineEmits(['search']);
 
 defineProps({
   placeholder: {
     type: String,
-    default: "Search...",
+    default: 'Search...',
   },
   button: {
     type: String,
-    default: "⌘K",
+    default: '⌘K',
   },
 });
 
 const handleClickButton = (input) => {
-  emit("search", input);
+  emit('search', input);
 };
 </script>
 
@@ -51,15 +51,24 @@ const handleClickButton = (input) => {
   background-color: $neutral-surface;
   border: 1px solid $neutral-outline;
   border-radius: $radius-md;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 
   &__icon {
-    color: $gray-400;
+    color: $neutral-on-surface-variant;
   }
 
   &__input {
+    width: 100%;
     background-color: transparent;
     outline: none;
     border: none;
+    color: $neutral-on-surface;
+
+    &::placeholder {
+      color: $neutral-on-surface-variant;
+    }
   }
 
   &__button {
@@ -67,10 +76,10 @@ const handleClickButton = (input) => {
 
     padding: space(1) space(0.5);
 
-    background-color: $white;
+    background-color: $neutral-surface-container;
     border: 1px solid $neutral-outline;
     border-radius: $radius-sm;
-    color: $gray-400;
+    color: $neutral-on-surface-variant;
 
     font-size: rem(10);
   }

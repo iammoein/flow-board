@@ -60,6 +60,8 @@ const props = defineProps({
   },
 });
 
+console.log(props.options);
+
 const dropdownRef = useTemplateRef('dropdownRef');
 const model = defineModel();
 
@@ -122,16 +124,19 @@ const selectedLabel = computed(() => {
 
   &__menu {
     position: absolute;
-    z-index: 10;
+
     width: 100%;
     margin-top: space(1);
+    min-height: rem(50);
     max-height: rem(200);
-    overflow-y: auto;
+    padding: space(2) space(3);
 
     background-color: $neutral-surface;
-
     border-radius: space(2);
     box-shadow: 0 rem(4) rem(12) rgba($gray-900, 0.1);
+
+    overflow-y: auto;
+    z-index: 10;
   }
 
   &__menu-item {
